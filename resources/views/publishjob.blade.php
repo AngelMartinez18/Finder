@@ -9,6 +9,6 @@
 <body>
     <!-- Componente Blade: resources/views/components/navbar.blade.php -->
     <x-navbar />
-    <span>Soy el registro de usuarios</span>
+    <span>Soy la página de publicación de empleos</span>
 </body>
 </html>

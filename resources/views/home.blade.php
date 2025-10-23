@@ -11,20 +11,8 @@
 </head>
 
 <body class="bg-gray-900">
-    <!-- Barra de navegación -->
-    <nav class="bg-gray-800 px-8 py-4 flex items-center">
-        <div class="flex items-center">
-            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Logo" class="w-12 h-12 ml-40">
-        </div>
-        <div class="flex space-x-8 ml-14">
-            <a href="#" class="text-gray-300 hover:text-white text-2x1">Buscar Empleos</a>
-            <a href="#" class="text-gray-300 hover:text-white text-2x1">Contacto</a>
-        </div>
-        <div class="flex space-x-6 mr-14 ml-auto">
-            <a href="{{ route('login') }}" class="text-gray-300 hover:text-white text-2x1">Log in</a>
-            <a href="{{ route('register') }}" class="text-gray-300 hover:text-white text-2x1">Register</a>
-        </div>
-    </nav>
+    <!-- Navbar como componente Blade -->
+    <x-navbar />
 
     <!-- Contenido principal -->
     <div class="bg-blue-600 h-screen flex flex-col justify-center items-center">
@@ -41,19 +29,25 @@
         </div>
 
         <div class="flex space-x-6 mt-2">
+            <a href="{{ route('searchjob') }}">
             <button class="bg-green-400 text-white font-semibold px-6 py-3 rounded-[40px] hover:scale-110 transition duration-300">
                 Buscar Empleos
             </button>
+            </a>
+
+            <a href="{{ route('publishjob') }}">
             <button class="bg-yellow-400 text-blue-600 font-semibold px-6 py-3 rounded-[40px] hover:scale-110 transition duration-300">
                 Publicar Empleos
             </button>
+            </a>
         </div>
     </div>
 
     <!-- Segundo Contenedor -->
     <div class="bg-white w-full h-screen flex flex-col justify-center items-center">
         <div class="flex items-center">
-            <img src="./Imagenes/LogoFinderB.png" alt="Logo" class="w-1/3 h-auto ml-20 mr-40">
+            
+            <img src="./Imagenes/LogoFinderA.png" alt="Logo" class="w-1/3 h-auto ml-20 mr-40">
             <div class="">
                 <h1 class="text-black text-5xl md:text-6xl font-extrabold leading-tight mb-6 mr-10">El Problema que Resuelve Finder</h1>
                 <p class="text-gray-700 text-lg max-w-xl mb-10  ">

@@ -6,8 +6,8 @@
     <title>Document</title>
 </head>
 <body>
-    <h1 class="text-3xl font-bold underline">
-        Hello world!
-      </h1>
+    <!-- Componente Blade: resources/views/components/navbar.blade.php -->
+    <x-navbar />
+    <span>Soy la página de login</span>
 </body>
 </html>

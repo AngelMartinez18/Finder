@@ -13,3 +13,15 @@ Route::get('/login', function () {
 Route::get('/register', function () {
     return view('register');
 })->name('register');
+
+Route::get('/searchjob', function () {
+    return view('searchjob');
+})->name('searchjob');
+
+Route::get('/contactus', function () {
+    return view('contactus');
+})->name('contactus');
+
+Route::get('/publishjob', function () {
+    return view('publishjob');
+})->name('publishjob');
