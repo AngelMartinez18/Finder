@@ -10,7 +10,7 @@
     <!-- Componente Blade: resources/views/components/navbar.blade.php -->
 <nav class="bg-gray-800 px-8 py-4 flex items-center">
     <div class="flex items-center">
-        <a href="{{ route('home') }}"><img src="{{ asset('Imagenes/LogoFinderB.png') }}" alt="Logo" class="w-12 h-12 ml-40"></a>
+        <a href="{{ route('home') }}"><img src="{{ asset('Imagenes/LogoFinderB.png') }}" alt="Logo" class="w-16 h-16 ml-40 resize"></a>
         
     </div>
     <div class="flex space-x-8 ml-14">
