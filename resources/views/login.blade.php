@@ -52,7 +52,7 @@
                         @endif
                     </form>
 
-                    <p class="text-sm text-gray-500 mt-4">(*) Datos Obligatorios</p>
+                 
                 </div>
 
                 <!-- Columna derecha: Crear cuenta -->
@@ -63,7 +63,7 @@
                         <p class="text-gray-600 mb-6">Crear una cuenta tiene muchos beneficios .</p>
 
                         <div class="mt-6">
-                            <a href="{{ route('register') }}" class="bg-blue-400 text-white font-semibold px-6 py-3 rounded-md hover:scale-150 transition duration-300  hover:bg-blue-600">CREAR UNA CUENTA</a>
+                            <button onclick="window.location='{{ route('register') }}'" class="bg-blue-400 text-white font-semibold px-6 py-3 rounded-md hover:scale-110 transition duration-300  hover:bg-blue-600">CREAR UNA CUENTA</button>
                         </div>
                     </div>
                 </div>
