@@ -12,13 +12,13 @@
     <x-navbar />
 
     <main class="max-w-6xl mx-auto mt-12 px-6">
-        <h1 class="text-center text-4xl text-blue-500 font-semibold mb-8">Iniciar sesión</h1>
+        <h1 class="text-center text-4xl text-blue-600 font-semibold mb-8">¡Bienvenido al inicio de sesión de Finder!</h1>
 
         <section class="bg-gray-100 rounded-lg shadow-md p-8">
             <div class="grid grid-cols-2 md:grid-cols-2 gap-5">
                 <!-- Columna izquierda: Ya registrado + formulario -->
                 <div>
-                    <h2 class="text-xl text-blue-500 font-semibold mb-2">¿Ya estás registrado?</h2>
+                    <h2 class="text-xl text-yellow-500 font-semibold mb-2">¿Ya estás registrado?</h2>
                     <hr class="border-t border-gray-200 mb-4">
                     <p class="text-gray-600 mb-6">Si ya tienes una cuenta registrada, ingresa con tu correo electrónico y contraseña.</p>
 
@@ -60,7 +60,7 @@
                 <!-- Columna derecha: Crear cuenta -->
                 <div class="flex flex-col justify-center items-start md:items-center">
                     <div class="w-full md:w-11/12">
-                        <h2 class="text-xl text-blue-500 font-semibold mb-2">¿Aún no tienes cuenta?</h2>
+                        <h2 class="text-xl text-green-500 font-semibold mb-2">¿Aún no tienes cuenta?</h2>
                         <hr class="border-t border-gray-200 mb-4">
                         <p class="text-gray-600 mb-6">Crear una cuenta tiene muchos beneficios .</p>
 
