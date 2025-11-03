@@ -29,16 +29,8 @@
         </div>
 
         <div class="flex space-x-6 mt-2">
-            <a href="{{ route('searchjob') }}">
-                <button class="bg-green-400 text-white font-semibold px-6 py-3 rounded-[40px] hover:scale-110 transition duration-300">
-                    Buscar Empleos
-                </button>
-            </a>
-
-            <a href="{{ route('publishjob') }}">
-                <button class="bg-yellow-400 text-blue-600 font-semibold px-6 py-3 rounded-[40px] hover:scale-110 transition duration-300">
-                    Publicar Empleos
-                </button>
+            <a href="{{ route('searchjob') }}" class="bg-green-400 text-white font-semibold px-6 py-3 rounded-[40px] hover:scale-110 transition duration-300 inline-block">
+                Buscar Empleos
             </a>
         </div>
     </div>

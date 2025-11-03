@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
-    <title>Iniciar Sesión</title>
+    <title>Login</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
 <body class="bg-gray-200">
-      <!-- Navbar como componente Blade -->
+    <!-- Navbar como componente Blade -->
     <x-navbar />
 
     <main class="max-w-6xl mx-auto mt-12 px-6">
-        <h1 class="text-3xl text-blue-500 font-semibold mb-8">Iniciar sesión o crear una cuenta</h1>
+        <h1 class="text-center text-4xl text-blue-500 font-semibold mb-8">Iniciar sesión</h1>
 
         <section class="bg-gray-100 rounded-lg shadow-md p-8">
             <div class="grid grid-cols-2 md:grid-cols-2 gap-5">
@@ -42,17 +44,17 @@
                         </div>
 
                         @if ($errors->any())
-                            <div class="mt-4 text-red-600">
-                                <ul class="list-disc list-inside">
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
+                        <div class="mt-4 text-red-600">
+                            <ul class="list-disc list-inside">
+                                @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
                         @endif
                     </form>
 
-                 
+
                 </div>
 
                 <!-- Columna derecha: Crear cuenta -->
@@ -63,7 +65,9 @@
                         <p class="text-gray-600 mb-6">Crear una cuenta tiene muchos beneficios .</p>
 
                         <div class="mt-6">
-                            <button onclick="window.location='{{ route('register') }}'" class="bg-blue-400 text-white font-semibold px-6 py-3 rounded-md hover:scale-110 transition duration-300  hover:bg-blue-600">CREAR UNA CUENTA</button>
+                            <a href="{{ route('register') }}" class="bg-blue-400 text-white font-semibold px-6 py-3 rounded-md hover:scale-110 transition duration-300 hover:bg-blue-600 inline-block">
+                                CREAR UNA CUENTA
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -71,4 +75,5 @@
         </section>
     </main>
 </body>
+
 </html>

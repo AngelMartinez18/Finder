@@ -1,24 +1,29 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
-    <title>Nueva cuenta</title>
+    <title>Registro</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
 <body class="bg-gray-200">
-  
 
-    <main class="max-w-6xl mx-auto mt-8 px-6">
-        <h1 class="text-4xl text-blue-500 font-semibold mb-8">Nueva cuenta</h1>
+    <x-navbar />
 
-        <form method="POST" action="{{ route('register') }}" class="bg-gray-100 rounded-lg shadow p-8">
+    <main class="max-w-6xl mx-auto mt-8 px-6 pb-8">
+        <h1 class="text-center text-4xl text-blue-600 font-semibold mb-8">
+            ¡Bienvenido a finder, crea tu cuenta!
+        </h1>
+
+        <form method="POST" action="{{ route('register') }}" data-form="register" class="bg-gray-100 rounded-lg shadow p-8">
             @csrf
-           
+
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <!-- Columna izquierda: Información personal y rol -->
                 <div>
-                    <h2 class="text-3xl text-blue-500 font-semibold mb-2">Información personal</h2>
+                    <h2 class="text-2xl text-yellow-500 font-semibold mb-2">Información personal</h2>
                     <hr class="border-t border-gray-200 mb-4">
 
                     <label class="block text-sm text-gray-700 mb-1">Nombre <span class="text-red-500">*</span></label>
@@ -46,27 +51,25 @@
                     <div id="passwordError" class="hidden text-red-500 text-sm mt-2"></div>
                     <div id="passwordConfirmError" class="hidden text-red-500 text-sm mt-2"></div>
 
-                    <div class="mt-5 flex justify-between items-center">
-                        <label class="inline-flex items-center">
-                            <a href="{{ route('login') }}" class="ml-4 bg-blue-500 text-white px-4 py-2 rounded-md font-semibold hover:bg-blue-600">Ir al login</a>
-                        </label>
-                    </div>
-                    
                     <!-- Botón enviar alineado a la derecha como en la imagen -->
                     <div class="mt-5 flex justify-end">
-                        <button type="submit" class="bg-green-500 text-white px-6 py-3 rounded-md  bg-green-400  font-semibold px-6 py-3 rounded-[40px] hover:scale-110 transition duration-300  hover:bg-green-600">ENVIAR</button>
-                    </div>
-                   
 
-                     
+                        <button type="submit" class="bg-green-400 text-white min-w-[120px] min-h-[40px] rounded-md font-semibold hover:scale-110 transition duration-300 hover:bg-green-600">
+                            ENVIAR
+                        </button>
+
+                    </div>
+
+
+
                 </div>
 
                 <!-- Columna derecha: Sign-in information -->
                 <div>
-                   <h2 class="text-3xl text-blue-500 font-semibold mb-2">Perfil Profesional</h2>
+                    <h2 class="text-2xl text-green-500 font-semibold mb-2">Perfil Profesional</h2>
                     <hr class="border-t border-gray-200 mb-4">
 
-                      <!-- Campos específicos para Candidato -->
+                    <!-- Campos específicos para Candidato -->
                     <div id="candidateFields" class="space-y-3">
                         <label class="block text-sm text-gray-700">Resumen / Perfil profesional</label>
                         <textarea name="resumen" rows="4" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-orange-200">{{ old('resumen') }}</textarea>
@@ -99,26 +102,29 @@
                         <input name="website" type="url" value="{{ old('website') }}" class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-orange-200">
                     </div>
 
-                <div>
-                   
+                    <div>
 
-                    @if ($errors->any())
+
+                        @if ($errors->any())
                         <div class="mt-2 text-red-600">
                             <ul class="list-disc list-inside text-sm">
                                 @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
+                                <li>{{ $error }}</li>
                                 @endforeach
                             </ul>
                         </div>
-                    @endif
+                        @endif
 
-                    
+
+                    </div>
                 </div>
-            </div>
 
-            
+
         </form>
+
     </main>
+
+    <x-footer />
 
     <script>
         // Controlar visibilidad de campos según rol seleccionado
@@ -143,16 +149,19 @@
         document.addEventListener('DOMContentLoaded', toggleRoleFields);
 
         // --- validación de contraseña en cliente ---
-        document.addEventListener('DOMContentLoaded', function () {
-            const form = document.querySelector('form[action="{{ route('register') }}"]') || document.querySelector('form');
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('form[data-form="register"]') || document.querySelector('form');
             const password = document.getElementById('password');
             const passwordConfirm = document.getElementById('password_confirmation');
             const passwordError = document.getElementById('passwordError');
             const passwordConfirmError = document.getElementById('passwordConfirmError');
 
+
             function clearErrors() {
-                passwordError.classList.add('hidden'); passwordError.innerHTML = '';
-                passwordConfirmError.classList.add('hidden'); passwordConfirmError.innerHTML = '';
+                passwordError.classList.add('hidden');
+                passwordError.innerHTML = '';
+                passwordConfirmError.classList.add('hidden');
+                passwordConfirmError.innerHTML = '';
             }
 
             function validatePassword() {
@@ -185,14 +194,18 @@
             passwordConfirm.addEventListener('input', clearErrors);
 
             // validar al enviar
-            form.addEventListener('submit', function (e) {
+            form.addEventListener('submit', function(e) {
                 if (!validatePassword()) {
                     e.preventDefault();
                     // opcional: desplazar al campo de contraseña
-                    password.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    password.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
                 }
             });
         });
     </script>
 </body>
+
 </html>

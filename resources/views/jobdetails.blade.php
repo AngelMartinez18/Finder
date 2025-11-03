@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Publicar Trabajo</title>
+    <title>Trabajo</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-    <!-- Componente Blade: resources/views/components/navbar.blade.php -->
     <x-navbar />
-    <span>Soy la página de publicación de empleos</span>
+    <span>Soy la página de detalles del trabajo</span>
 </body>
 </html>
