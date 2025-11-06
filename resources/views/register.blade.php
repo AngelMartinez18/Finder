@@ -12,8 +12,8 @@
     <x-navbar />
 
     <main class="max-w-6xl mx-auto mt-8 px-6 pb-8">
-        <h1 class="text-center text-4xl text-blue-600 font-semibold mb-8">
-            ¡Bienvenido a finder, crea tu cuenta!
+        <h1 class="text-center md:text-5xl lg:text-5xl font-extrabold text-gray-900 leading-tight pb-8">
+            ¡Bienvenido al Registro <span class="text-blue-600">de cuenta de Finder!</span>
         </h1>
 
         <form method="POST" action="{{ route('register') }}" data-form="register" class="bg-gray-100 rounded-lg shadow p-8">
@@ -54,7 +54,7 @@
                     <!-- Botón enviar alineado a la derecha como en la imagen -->
                     <div class="mt-5 flex justify-end">
 
-                        <button type="submit" class="bg-green-400 text-white min-w-[120px] min-h-[40px] rounded-md font-semibold hover:scale-110 transition duration-300 hover:bg-green-600">
+                        <button type="submit" class="bg-green-600 text-white min-w-[120px] min-h-[40px] rounded-md font-semibold hover:scale-110 transition duration-300 hover:bg-green-600">
                             ENVIAR
                         </button>
 

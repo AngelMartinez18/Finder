@@ -11,8 +11,10 @@
     <!-- Navbar como componente Blade -->
     <x-navbar />
 
-    <main class="max-w-6xl mx-auto mt-12 px-6">
-        <h1 class="text-center text-4xl text-blue-600 font-semibold mb-8">¡Bienvenido al inicio de sesión de Finder!</h1>
+    <main class="max-w-6xl mx-auto p-9">
+        <h1 class="text-center md:text-5xl lg:text-5xl font-extrabold text-gray-900 leading-tight pb-8">
+            ¡Bienvenido al Inicio <span class="text-blue-600">de Sesion de Finder!</span>
+        </h1>
 
         <section class="bg-gray-100 rounded-lg shadow-md p-8">
             <div class="grid grid-cols-2 md:grid-cols-2 gap-5">
@@ -74,6 +76,7 @@
             </div>
         </section>
     </main>
+    <x-footer />
 </body>
 
 </html>
