@@ -37,17 +37,12 @@
             </div>
         </section>
         <section id="job-cards" class="mt-6 flex flex-col md:flex-row gap-4 items-center justify-center bg-white p-6 rounded-lg shadow-md">
-            @php
-                $jobs = $jobs ?? [
-                    ['id' => 1, 'title' => 'Frontend Developer', 'company' => 'ACME S.A.', 'location' => 'Madrid', 'type' => 'Remoto', 'salary' => '€30k-€40k', 'description' => 'Desarrolla interfaces con Vue/React', 'working-time'=> 'Jornada Diurna', 'charge'=>'Administrador', 'category'=>'', 'apply_url' => '#'],
-                    ['id' => 2, 'title' => 'Chef', 'company' => 'Restaurante Buen Gusto', 'location' => 'Valencia', 'type' => 'Presencial', 'salary' => '€18k-€24k', 'description' => 'Responsable de carta y equipo de cocina', 'working-time'=> 'Jornada Diurna', 'charge'=>'Administrador', 'category'=>'', 'apply_url' => '#'],
-                    ['id' => 3, 'title' => 'Marketing Specialist', 'company' => 'MarketPro', 'location' => 'Barcelona', 'type' => 'Híbrido', 'salary' => '€25k-€35k', 'description' => 'Estrategias de marketing digital', 'working-time'=> 'Jornada Diurna', 'charge'=>'Administrador', 'category'=>'', 'apply_url' => '#'],
-                ];
-            @endphp
 
             <div class="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 @foreach($jobs as $job)
-                    <x-job-card :job="$job" />
+                    <a href="{{ route('jobdetails', data_get($job, 'id_oferta')) }}">
+                        <x-job-card :job="$job" />
+                    </a>
                 @endforeach
             </div>
         </section>

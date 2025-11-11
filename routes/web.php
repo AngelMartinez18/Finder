@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\JobController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -18,9 +19,7 @@ Route::get('/forgotpassword', function () {
     return view('forgotpassword');
 })->name('forgotpassword');
 
-Route::get('/searchjob', function () {
-    return view('searchjob');
-})->name('searchjob');
+Route::get('/searchjob', [JobController::class, 'index'])->name('searchjob');
 
 Route::get('/contactus', function () {
     return view('contactus');
@@ -30,9 +29,7 @@ Route::get('/publishjob', function () {
     return view('publishjob');
 })->name('publishjob');
 
-Route::get('/jobdetails', function () {
-    return view('jobdetails');
-})->name('jobdetails');
+Route::get('/jobdetails/{id}', [JobController::class, 'show'])->name('jobdetails');
 
 Route::get('/perfil', function () {
     return view('perfil');
