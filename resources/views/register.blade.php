@@ -3,111 +3,144 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Registro</title>
+    <title>Registro | Finder</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/x-icon" href="{{ asset('Imagenes/finder.ico') }}">
 </head>
 
-<body class="bg-gray-200">
+<body class="bg-gray-100 text-gray-800 flex flex-col min-h-screen">
 
+    <!-- Navbar -->
     <x-navbar />
 
-    <main class="max-w-6xl mx-auto mt-8 px-6 pb-8">
-        <h1 class="text-center md:text-5xl lg:text-5xl font-extrabold text-gray-900 leading-tight pb-8">
-            ¡Bienvenido al Registro <span class="text-blue-600">de cuenta de Finder!</span>
-        </h1>
+    <main class="flex-grow flex items-center justify-center px-4 py-10">
+        <div class="max-w-5xl w-full bg-white rounded-2xl shadow-lg overflow-hidden">
+            <div class="grid grid-cols-1 md:grid-cols-2">
 
-        <form method="POST" action="{{ route('register') }}" data-form="register" class="bg-gray-100 rounded-lg shadow p-8">
-            @csrf
-
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Columna izquierda: Información personal y rol -->
-                <div>
-                    <h2 class="text-2xl text-yellow-500 font-semibold mb-2">Información personal</h2>
-                    <hr class="border-t border-gray-200 mb-4">
-
-                    <label class="block text-sm text-gray-700 mb-1">Nombre <span class="text-red-500">*</span></label>
-                    <input name="name" type="text" value="{{ old('name') }}" required class="w-full px-4 py-2 border rounded mb-3 focus:outline-none focus:ring-2 focus:ring-orange-200">
-
-                    <label class="block text-sm text-gray-700 mb-1">Apellido <span class="text-red-500">*</span></label>
-                    <input name="apellido" type="text" value="{{ old('apellido') }}" required class="w-full px-4 py-2 border rounded mb-3 focus:outline-none focus:ring-2 focus:ring-orange-200">
-
-                    <label class="block text-sm text-gray-700 mb-1">Selecciona tu rol <span class="text-red-500">*</span></label>
-                    <select id="roleSelect" name="role" class="w-full px-4 py-2 border rounded mb-4 focus:outline-none focus:ring-2 focus:ring-orange-200">
-                        <option value="user" {{ old('role') == 'user' ? 'selected' : '' }}>Candidato</option>
-                        <option value="employer" {{ old('role') == 'employer' ? 'selected' : '' }}>Empleador</option>
-                    </select>
-
-                    <label class="block text-sm text-gray-700 mb-1">Correo electrónico <span class="text-red-500">*</span></label>
-                    <input name="email" type="email" value="{{ old('email') }}" required class="w-full px-4 py-2 border rounded mb-3 focus:outline-none focus:ring-2 focus:ring-orange-200">
-
-                    <label class="block text-sm text-gray-700 mb-1">Contraseña <span class="text-red-500">*</span></label>
-                    <input name="password" id="password" type="password" required class="w-full px-4 py-2 border rounded mb-2 focus:outline-none focus:ring-2 focus:ring-orange-200">
-                    <p class="text-xs text-gray-500 mb-3">Seguridad de la contraseña: usa al menos 8 caracteres.</p>
-
-                    <label class="block text-sm text-gray-700 mb-1">Confirmar contraseña <span class="text-red-500">*</span></label>
-                    <input name="password_confirmation" id="password_confirmation" type="password" required class="w-full px-4 py-2 border rounded mb-6 focus:outline-none focus:ring-2 focus:ring-orange-200">
-
-                    <div id="passwordError" class="hidden text-red-500 text-sm mt-2"></div>
-                    <div id="passwordConfirmError" class="hidden text-red-500 text-sm mt-2"></div>
-
-                    <!-- Botón enviar alineado a la derecha como en la imagen -->
-                    <div class="mt-5 flex justify-end">
-
-                        <button type="submit" class="bg-green-600 text-white min-w-[120px] min-h-[40px] rounded-md font-semibold hover:scale-110 transition duration-300 hover:bg-green-600">
-                            ENVIAR
-                        </button>
-
-                    </div>
-
-
-
+                <!-- Columna izquierda -->
+                <div class="bg-gradient-to-br from-blue-500 to-blue-600 text-white p-10 flex flex-col justify-center text-center">
+                    <h2 class="text-2xl font-semibold mb-3">Crea tu cuenta Finder</h2>
+                    <p class="text-blue-100 mb-6 text-sm max-w-xs mx-auto">
+                        Encuentra oportunidades laborales o publica tus ofertas como empresa.
+                    </p>
+                    <a href="{{ route('login') }}"
+                        class="bg-white text-blue-600 font-semibold px-6 py-2.5 rounded-lg shadow hover:bg-gray-100 transition">
+                        Ya tengo una cuenta
+                    </a>
                 </div>
 
-                <!-- Columna derecha: Sign-in information -->
-                <div>
-                    <h2 class="text-2xl text-green-500 font-semibold mb-2">Perfil Profesional</h2>
-                    <hr class="border-t border-gray-200 mb-4">
+                <!-- Columna derecha -->
+                <div class="p-8 md:p-10">
+                    <h1 class="text-3xl font-bold text-gray-800 mb-2">Registro</h1>
+                    <p class="text-gray-600 mb-6 text-sm">Completa los campos para crear tu cuenta.</p>
 
-                    <!-- Campos específicos para Candidato -->
-                    <div id="candidateFields" class="space-y-3">
-                        <label class="block text-sm text-gray-700">Resumen / Perfil profesional</label>
-                        <textarea name="resumen" rows="4" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-orange-200">{{ old('resumen') }}</textarea>
+                    <form method="POST" action="{{ route('register.post') }}" enctype="multipart/form-data" id="registerForm" class="space-y-5">
+                        @csrf
 
-                        <label class="block text-sm text-gray-700">Experiencia (breve)</label>
-                        <input name="experiencia" type="text" value="{{ old('experiencia') }}" class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-orange-200">
+                        <!-- Nombre -->
+                        <div>
+                            <label for="nombre" class="block text-sm font-medium text-gray-700 mb-1">
+                                Nombre completo <span class="text-red-500">*</span>
+                            </label>
+                            <input id="nombre" name="nombre" type="text" value="{{ old('nombre') }}" required
+                                placeholder="Ej. Juan Pérez"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:outline-none">
+                        </div>
 
-                        <label class="block text-sm text-gray-700">Educación</label>
-                        <input name="educacion" type="text" value="{{ old('educacion') }}" class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-orange-200">
+                        <!-- Correo -->
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">
+                                Correo electrónico <span class="text-red-500">*</span>
+                            </label>
+                            <input id="email" name="email" type="email" value="{{ old('email') }}" required
+                                placeholder="ejemplo@correo.com"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:outline-none">
+                        </div>
 
-                        <label class="block text-sm text-gray-700">Habilidades</label>
-                        <input name="habilidades" type="text" value="{{ old('habilidades') }}" placeholder="Ej: PHP, Laravel, Comunicación" class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-orange-200">
-                    </div>
+                        <!-- Tipo de usuario -->
+                        <div>
+                            <label for="tipo_usuario" class="block text-sm font-medium text-gray-700 mb-1">
+                                Tipo de usuario <span class="text-red-500">*</span>
+                            </label>
+                            <select id="tipo_usuario" name="tipo_usuario" required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:outline-none">
+                                <option value="">Selecciona una opción</option>
+                                <option value="candidato">Candidato</option>
+                                <option value="empleador">Empleador</option>
+                            </select>
+                        </div>
 
-                    <!-- Campos específicos para Empleador -->
-                    <div id="employerFields" class="hidden space-y-3">
-                        <label class="block text-sm text-gray-700">Nombre de la empresa <span class="text-red-500">*</span></label>
-                        <input name="empresa" type="text" value="{{ old('empresa') }}" class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-orange-200">
+                        <!-- Campos Candidato -->
+                        <div id="candidatoFields" class="hidden space-y-4">
+                            <div>
+                                <label for="telefono" class="block text-sm font-medium text-gray-700 mb-1">Teléfono</label>
+                                <input id="telefono" name="telefono" type="text" placeholder="Número de contacto"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:outline-none">
+                            </div>
+                            <div>
+                                <label for="ubicacion" class="block text-sm font-medium text-gray-700 mb-1">Ubicación</label>
+                                <input id="ubicacion" name="ubicacion" type="text" placeholder="Ciudad, país"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:outline-none">
+                            </div>
+                            <div>
+                                <label for="cv" class="block text-sm font-medium text-gray-700 mb-1">Currículum (PDF)</label>
+                                <input id="cv" name="cv" type="file" accept=".pdf"
+                                    class="w-full border border-gray-300 rounded-lg px-4 py-2 bg-gray-50 cursor-pointer">
+                            </div>
+                        </div>
 
-                        <label class="block text-sm text-gray-700">Rubro</label>
-                        <input name="rubro" type="text" value="{{ old('rubro') }}" class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-orange-200">
+                        <!-- Campos Empleador -->
+                        <div id="empleadorFields" class="hidden space-y-4">
+                            <div>
+                                <label for="nombre_empresa" class="block text-sm font-medium text-gray-700 mb-1">Nombre de la empresa</label>
+                                <input id="nombre_empresa" name="nombre_empresa" type="text" placeholder="Ej. TechFinder S.A."
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:outline-none">
+                            </div>
+                            <div>
+                                <label for="sector" class="block text-sm font-medium text-gray-700 mb-1">Sector</label>
+                                <input id="sector" name="sector" type="text" placeholder="Ej. Tecnología, Educación, Salud..."
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:outline-none">
+                            </div>
+                            <div>
+                                <label for="ubicacion_empresa" class="block text-sm font-medium text-gray-700 mb-1">Ubicación</label>
+                                <input id="ubicacion_empresa" name="ubicacion" type="text" placeholder="Ej. Managua, Nicaragua"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:outline-none">
+                            </div>
+                            <div>
+                                <label for="descripcion" class="block text-sm font-medium text-gray-700 mb-1">Descripción</label>
+                                <textarea id="descripcion" name="ubicacion" rows="3" placeholder="Breve descripción de la empresa"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:outline-none"></textarea>
+                            </div>
+                            <div>
+                                <label for="sitio_web" class="block text-sm font-medium text-gray-700 mb-1">Sitio web</label>
+                                <input id="sitio_web" name="sitio_web" type="url" placeholder="https://www.ejemplo.com"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:outline-none">
+                            </div>
+                        </div>
 
-                        <label class="block text-sm text-gray-700">Teléfono de la empresa</label>
-                        <input name="telefono_empresa" type="text" value="{{ old('telefono_empresa') }}" class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-orange-200">
+                        <!-- Contraseña -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="password" class="block text-sm font-medium text-gray-700 mb-1">
+                                    Contraseña <span class="text-red-500">*</span>
+                                </label>
+                                <input id="password" type="password" name="password" required placeholder="••••••••"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:outline-none">
+                            </div>
+                            <div>
+                                <label for="password_confirmation" class="block text-sm font-medium text-gray-700 mb-1">
+                                    Confirmar contraseña <span class="text-red-500">*</span>
+                                </label>
+                                <input id="password_confirmation" type="password" name="password_confirmation" required placeholder="Repite la contraseña"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:outline-none">
+                            </div>
+                        </div>
 
-                        <label class="block text-sm text-gray-700">Dirección</label>
-                        <input name="direccion_empresa" type="text" value="{{ old('direccion_empresa') }}" class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-orange-200">
-
-                        <label class="block text-sm text-gray-700">Sitio web</label>
-                        <input name="website" type="url" value="{{ old('website') }}" class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-orange-200">
-                    </div>
-
-                    <div>
-
-
+                        <!-- Errores -->
                         @if ($errors->any())
-                        <div class="mt-2 text-red-600">
-                            <ul class="list-disc list-inside text-sm">
+                        <div class="bg-red-50 border-l-4 border-red-500 text-red-700 p-3 rounded-md text-sm">
+                            <ul class="list-disc list-inside">
                                 @foreach ($errors->all() as $error)
                                 <li>{{ $error }}</li>
                                 @endforeach
@@ -115,97 +148,58 @@
                         </div>
                         @endif
 
-
-                    </div>
+                        <!-- Botón -->
+                        <button type="submit"
+                            class="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-2.5 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-[1.02]">
+                            Registrarme
+                        </button>
+                    </form>
                 </div>
-
-
-        </form>
-
+            </div>
+        </div>
     </main>
 
     <x-footer />
 
     <script>
-        // Controlar visibilidad de campos según rol seleccionado
-        const roleSelect = document.getElementById('roleSelect');
-        const candidateFields = document.getElementById('candidateFields');
-        const employerFields = document.getElementById('employerFields');
+        // Mostrar/ocultar campos según tipo de usuario
+        const tipoUsuario = document.getElementById('tipo_usuario');
+        const candidatoFields = document.getElementById('candidatoFields');
+        const empleadorFields = document.getElementById('empleadorFields');
+        const form = document.getElementById('registerForm');
 
-        function toggleRoleFields() {
-            const role = roleSelect.value;
-            if (role === 'user') {
-                candidateFields.classList.remove('hidden');
-                employerFields.classList.add('hidden');
-            } else {
-                candidateFields.classList.add('hidden');
-                employerFields.classList.remove('hidden');
-            }
+        function toggleFields() {
+            const valor = tipoUsuario.value;
+            candidatoFields.classList.toggle('hidden', valor !== 'candidato');
+            empleadorFields.classList.toggle('hidden', valor !== 'empleador');
         }
 
-        roleSelect.addEventListener('change', toggleRoleFields);
+        tipoUsuario.addEventListener('change', toggleFields);
+        document.addEventListener('DOMContentLoaded', toggleFields);
 
-        // Inicializar según valor anterior (si existiera)
-        document.addEventListener('DOMContentLoaded', toggleRoleFields);
+        // Antes de enviar, asegurar que el campo de ubicación no esté vacío
+        form.addEventListener('submit', (e) => {
+            const tipo = tipoUsuario.value;
 
-        // --- validación de contraseña en cliente ---
-        document.addEventListener('DOMContentLoaded', function() {
-            const form = document.querySelector('form[data-form="register"]') || document.querySelector('form');
-            const password = document.getElementById('password');
-            const passwordConfirm = document.getElementById('password_confirmation');
-            const passwordError = document.getElementById('passwordError');
-            const passwordConfirmError = document.getElementById('passwordConfirmError');
-
-
-            function clearErrors() {
-                passwordError.classList.add('hidden');
-                passwordError.innerHTML = '';
-                passwordConfirmError.classList.add('hidden');
-                passwordConfirmError.innerHTML = '';
-            }
-
-            function validatePassword() {
-                clearErrors();
-                const val = password.value || '';
-                const conf = passwordConfirm.value || '';
-                const errors = [];
-
-                if (val.length < 8) errors.push('La contraseña debe tener al menos 8 caracteres.');
-                if (!/[A-Z]/.test(val)) errors.push('Debe contener al menos una letra mayúscula.');
-                if (!/[a-z]/.test(val)) errors.push('Debe contener al menos una letra minúscula.');
-
-                if (errors.length) {
-                    passwordError.innerHTML = errors.join('<br>');
-                    passwordError.classList.remove('hidden');
-                    return false;
-                }
-
-                if (val !== conf) {
-                    passwordConfirmError.textContent = 'Las contraseñas no coinciden.';
-                    passwordConfirmError.classList.remove('hidden');
-                    return false;
-                }
-
-                return true;
-            }
-
-            // validación en tiempo real
-            password.addEventListener('input', clearErrors);
-            passwordConfirm.addEventListener('input', clearErrors);
-
-            // validar al enviar
-            form.addEventListener('submit', function(e) {
-                if (!validatePassword()) {
+            if (tipo === 'candidato') {
+                const ubicacion = document.getElementById('ubicacion');
+                if (!ubicacion.value.trim()) {
                     e.preventDefault();
-                    // opcional: desplazar al campo de contraseña
-                    password.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'center'
-                    });
+                    alert('Por favor ingresa tu ubicación antes de continuar.');
+                    ubicacion.focus();
                 }
-            });
+            } else if (tipo === 'empleador') {
+                const ubicacionEmpresa = document.getElementById('ubicacion_empresa');
+                if (!ubicacionEmpresa.value.trim()) {
+                    e.preventDefault();
+                    alert('Por favor ingresa la ubicación de la empresa.');
+                    ubicacionEmpresa.focus();
+                }
+            }
         });
     </script>
+
+
 </body>
 
 </html>

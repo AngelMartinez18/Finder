@@ -6,6 +6,7 @@
     <title>¡Busca tu empleo! | Finder</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/x-icon" href="{{ asset('Imagenes/finder.ico') }}">
 </head>
 <body class="bg-gray-200">
     <!-- Componente Blade: resources/views/components/navbar.blade.php -->
