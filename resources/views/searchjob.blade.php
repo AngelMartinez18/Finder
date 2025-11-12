@@ -11,7 +11,7 @@
     <!-- Componente Blade: resources/views/components/navbar.blade.php -->
     <x-navbar />
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 class="text-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight">
+        <h1 class="m-6 text-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight">
             Encuentra tu <span class="text-blue-600">Próximo Empleo</span>
         </h1>
 

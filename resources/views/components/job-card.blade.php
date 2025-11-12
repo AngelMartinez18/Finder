@@ -5,7 +5,7 @@
             {{ data_get($job, 'titulo', 'Título del puesto') }}
         </h3>
         <p class="text-blue-600">
-            {{ data_get($job, 'id_empresa', 'Empresa') }}
+            {{ data_get($job, 'nombre_empresa', 'Empresa') }}
         </p>
         <p class="mt-2 text-gray-500">
             <i class="fas fa-map-marker-alt mr-2 text-gray-500" aria-hidden="true"></i>{{ data_get($job, 'ubicacion', 'Ubicación') }}
