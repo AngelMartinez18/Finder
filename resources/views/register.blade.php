@@ -30,122 +30,149 @@
                     </a>
                 </div>
 
-                <!-- Columna derecha -->
+                <!-- Columna derecha: formulario -->
                 <div class="p-8 md:p-10">
                     <h1 class="text-3xl font-bold text-gray-800 mb-2">Registro</h1>
                     <p class="text-gray-600 mb-6 text-sm">Completa los campos para crear tu cuenta.</p>
 
-                    <form method="POST" action="{{ route('register.post') }}" enctype="multipart/form-data" id="registerForm" class="space-y-5">
+                    <form method="POST" action="{{ route('register.post') }}" id="registerForm"
+                        enctype="multipart/form-data" class="space-y-5">
                         @csrf
 
                         <!-- Nombre -->
                         <div>
-                            <label for="nombre" class="block text-sm font-medium text-gray-700 mb-1">
-                                Nombre completo <span class="text-red-500">*</span>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">
+                                Nombre <span class="text-red-500">*</span>
                             </label>
-                            <input id="nombre" name="nombre" type="text" value="{{ old('nombre') }}" required
-                                placeholder="Ej. Juan Pérez"
+                            <input type="text" name="nombre" value="{{ old('nombre') }}" required
+                                placeholder="Ej. Juan"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:outline-none">
+                        </div>
+
+                        <!-- Apellido -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">
+                                Apellido <span class="text-red-500">*</span>
+                            </label>
+                            <input type="text" name="apellido" value="{{ old('apellido') }}" required
+                                placeholder="Ej. Martínez López"
                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:outline-none">
                         </div>
 
                         <!-- Correo -->
                         <div>
-                            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">
                                 Correo electrónico <span class="text-red-500">*</span>
                             </label>
-                            <input id="email" name="email" type="email" value="{{ old('email') }}" required
+                            <input type="email" name="email" value="{{ old('email') }}" required
                                 placeholder="ejemplo@correo.com"
                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:outline-none">
                         </div>
 
-                        <!-- Tipo de usuario -->
+                        <!-- Rol -->
                         <div>
-                            <label for="tipo_usuario" class="block text-sm font-medium text-gray-700 mb-1">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">
                                 Tipo de usuario <span class="text-red-500">*</span>
                             </label>
-                            <select id="tipo_usuario" name="tipo_usuario" required
+                            <select id="rol" name="tipo_usuario" required
                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:outline-none">
                                 <option value="">Selecciona una opción</option>
-                                <option value="candidato">Candidato</option>
-                                <option value="empleador">Empleador</option>
+                                <option value="candidato" {{ old('tipo_usuario') == 'candidato' ? 'selected' : '' }}>Candidato</option>
+                                <option value="empleador" {{ old('tipo_usuario') == 'empleador' ? 'selected' : '' }}>Empleador</option>
                             </select>
                         </div>
 
-                        <!-- Campos Candidato -->
+                        <!-- CAMPOS CANDIDATO -->
                         <div id="candidatoFields" class="hidden space-y-4">
+
                             <div>
-                                <label for="telefono" class="block text-sm font-medium text-gray-700 mb-1">Teléfono</label>
-                                <input id="telefono" name="telefono" type="text" placeholder="Número de contacto"
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Teléfono</label>
+                                <input type="text" name="telefono" value="{{ old('telefono') }}"
+                                    placeholder="Número de contacto"
                                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:outline-none">
                             </div>
+
                             <div>
-                                <label for="ubicacion" class="block text-sm font-medium text-gray-700 mb-1">Ubicación</label>
-                                <input id="ubicacion" name="ubicacion" type="text" placeholder="Ciudad, país"
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Ubicación</label>
+                                <input type="text" name="ubicacion" value="{{ old('ubicacion') }}"
+                                    placeholder="Ciudad, país"
                                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:outline-none">
                             </div>
+
                             <div>
-                                <label for="cv" class="block text-sm font-medium text-gray-700 mb-1">Currículum (PDF)</label>
-                                <input id="cv" name="cv" type="file" accept=".pdf"
-                                    class="w-full border border-gray-300 rounded-lg px-4 py-2 bg-gray-50 cursor-pointer">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Fecha de nacimiento</label>
+                                <input type="date" name="fecha_nacimiento" value="{{ old('fecha_nacimiento') }}"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:outline-none">
                             </div>
+
                         </div>
 
-                        <!-- Campos Empleador -->
+                        <!-- CAMPOS EMPLEADOR -->
                         <div id="empleadorFields" class="hidden space-y-4">
+
                             <div>
-                                <label for="nombre_empresa" class="block text-sm font-medium text-gray-700 mb-1">Nombre de la empresa</label>
-                                <input id="nombre_empresa" name="nombre_empresa" type="text" placeholder="Ej. TechFinder S.A."
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Nombre de la empresa</label>
+                                <input type="text" name="empresa" value="{{ old('empresa') }}"
+                                    placeholder="Ej. TechFinder S.A."
                                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:outline-none">
                             </div>
+
                             <div>
-                                <label for="sector" class="block text-sm font-medium text-gray-700 mb-1">Sector</label>
-                                <input id="sector" name="sector" type="text" placeholder="Ej. Tecnología, Educación, Salud..."
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Sector</label>
+                                <input type="text" name="sector" value="{{ old('sector') }}"
+                                    placeholder="Ej. Tecnología, Educación..."
                                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:outline-none">
                             </div>
+
                             <div>
-                                <label for="ubicacion_empresa" class="block text-sm font-medium text-gray-700 mb-1">Ubicación</label>
-                                <input id="ubicacion_empresa" name="ubicacion" type="text" placeholder="Ej. Managua, Nicaragua"
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Ubicación</label>
+                                <input type="text" name="ubicacion_empresa" value="{{ old('ubicacion_empresa') }}"
+                                    placeholder="Ej. Managua, Nicaragua"
                                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:outline-none">
                             </div>
+
                             <div>
-                                <label for="descripcion" class="block text-sm font-medium text-gray-700 mb-1">Descripción</label>
-                                <textarea id="descripcion" name="ubicacion" rows="3" placeholder="Breve descripción de la empresa"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:outline-none"></textarea>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Descripción</label>
+                                <textarea name="descripcion" rows="3" placeholder="Breve descripción de la empresa"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:outline-none">{{ old('descripcion') }}</textarea>
                             </div>
+
                             <div>
-                                <label for="sitio_web" class="block text-sm font-medium text-gray-700 mb-1">Sitio web</label>
-                                <input id="sitio_web" name="sitio_web" type="url" placeholder="https://www.ejemplo.com"
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Sitio web</label>
+                                <input type="url" name="sitio_web" value="{{ old('sitio_web') }}"
+                                    placeholder="https://www.ejemplo.com"
                                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:outline-none">
                             </div>
+
                         </div>
 
                         <!-- Contraseña -->
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <label for="password" class="block text-sm font-medium text-gray-700 mb-1">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">
                                     Contraseña <span class="text-red-500">*</span>
                                 </label>
-                                <input id="password" type="password" name="password" required placeholder="••••••••"
+                                <input type="password" name="password" required placeholder="••••••••"
                                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:outline-none">
                             </div>
                             <div>
-                                <label for="password_confirmation" class="block text-sm font-medium text-gray-700 mb-1">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">
                                     Confirmar contraseña <span class="text-red-500">*</span>
                                 </label>
-                                <input id="password_confirmation" type="password" name="password_confirmation" required placeholder="Repite la contraseña"
+                                <input type="password" name="password_confirmation" required placeholder="Repite la contraseña"
                                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:outline-none">
                             </div>
                         </div>
 
                         <!-- Errores -->
                         @if ($errors->any())
-                        <div class="bg-red-50 border-l-4 border-red-500 text-red-700 p-3 rounded-md text-sm">
-                            <ul class="list-disc list-inside">
-                                @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
+                            <div class="bg-red-50 border-l-4 border-red-500 text-red-700 p-3 rounded-md text-sm">
+                                <ul class="list-disc list-inside">
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
                         @endif
 
                         <!-- Botón -->
@@ -155,51 +182,28 @@
                         </button>
                     </form>
                 </div>
+
             </div>
         </div>
     </main>
 
     <x-footer />
 
+    <!-- SCRIPT -->
     <script>
-        // Mostrar/ocultar campos según tipo de usuario
-        const tipoUsuario = document.getElementById('tipo_usuario');
+        const rolSelect = document.getElementById('rol');
         const candidatoFields = document.getElementById('candidatoFields');
         const empleadorFields = document.getElementById('empleadorFields');
-        const form = document.getElementById('registerForm');
 
         function toggleFields() {
-            const valor = tipoUsuario.value;
-            candidatoFields.classList.toggle('hidden', valor !== 'candidato');
-            empleadorFields.classList.toggle('hidden', valor !== 'empleador');
+            const role = rolSelect.value;
+            candidatoFields.classList.toggle('hidden', role !== 'candidato');
+            empleadorFields.classList.toggle('hidden', role !== 'empleador');
         }
 
-        tipoUsuario.addEventListener('change', toggleFields);
+        rolSelect.addEventListener('change', toggleFields);
         document.addEventListener('DOMContentLoaded', toggleFields);
-
-        // Antes de enviar, asegurar que el campo de ubicación no esté vacío
-        form.addEventListener('submit', (e) => {
-            const tipo = tipoUsuario.value;
-
-            if (tipo === 'candidato') {
-                const ubicacion = document.getElementById('ubicacion');
-                if (!ubicacion.value.trim()) {
-                    e.preventDefault();
-                    alert('Por favor ingresa tu ubicación antes de continuar.');
-                    ubicacion.focus();
-                }
-            } else if (tipo === 'empleador') {
-                const ubicacionEmpresa = document.getElementById('ubicacion_empresa');
-                if (!ubicacionEmpresa.value.trim()) {
-                    e.preventDefault();
-                    alert('Por favor ingresa la ubicación de la empresa.');
-                    ubicacionEmpresa.focus();
-                }
-            }
-        });
     </script>
 
-
 </body>
-
 </html>

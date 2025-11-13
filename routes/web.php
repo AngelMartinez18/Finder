@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\JobController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\JobController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -46,14 +47,51 @@ Route::get('/forgotpassword', function () {
 |--------------------------------------------------------------------------
 */
 
+use App\Http\Controllers\CandidatoController;
+
+Route::middleware(['auth'])->group(function () {
+
+    // Dashboard principal
+    Route::get('/candidato/home', [CandidatoController::class, 'index'])
+        ->name('candidato.home');
+
+    // Editar perfil
+    Route::get('/candidato/perfil', [CandidatoController::class, 'perfil'])
+        ->name('candidato.perfil');
+
+    Route::post('/candidato/perfil', [CandidatoController::class, 'updatePerfil'])
+        ->name('candidato.perfil.update');
+
+    // Experiencia
+    Route::get('/candidato/experiencias', [CandidatoController::class, 'experiencias'])
+        ->name('candidato.experiencias');
+
+    Route::post('/candidato/experiencias', [CandidatoController::class, 'storeExperiencia'])
+        ->name('candidato.experiencias.store');
+
+    // Educación
+    Route::get('/candidato/educacion', [CandidatoController::class, 'educacion'])
+        ->name('candidato.educacion');
+
+    Route::post('/candidato/educacion', [CandidatoController::class, 'storeEducacion'])
+        ->name('candidato.educacion.store');
+
+    // Habilidades
+    Route::get('/candidato/habilidades', [CandidatoController::class, 'habilidades'])
+        ->name('candidato.habilidades');
+
+    Route::post('/candidato/habilidades', [CandidatoController::class, 'storeHabilidad'])
+        ->name('candidato.habilidades.store');
+
+    // Postulaciones
+    Route::get('/candidato/postulaciones', [CandidatoController::class, 'postulaciones'])
+        ->name('candidato.postulaciones');
+});
+
+
 Route::middleware('auth')->group(function () {
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-
-    // ✅ Ejemplo de home por rol
-    Route::get('/candidato/home', function () {
-        return view('candidato.dashboard');   // Puedes cambiar la vista luego
-    })->name('candidato.home');
 
     Route::get('/empresario/home', function () {
         return view('empresario.dashboard');
@@ -67,8 +105,8 @@ Route::middleware('auth')->group(function () {
 | RESTO DE RUTAS (NO TOCADA)
 |--------------------------------------------------------------------------
 */
-
 Route::get('/searchjob', [JobController::class, 'index'])->name('searchjob');
+
 
 Route::get('/contactus', function () {
     return view('contactus');

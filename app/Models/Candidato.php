@@ -25,6 +25,14 @@ class Candidato extends Model
         'visibilidad_cv',
     ];
 
+    public function getFotoPerfilUrlAttribute()
+    {
+        return $this->foto_perfil
+            ? asset('storage/' . $this->foto_perfil)
+            : asset('Imagenes/default-user.png'); // o Imagenes/default-user.png
+    }
+
+
     public function usuario()
     {
         return $this->belongsTo(Usuario::class, 'id_usuario');
