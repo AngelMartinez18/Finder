@@ -6,39 +6,22 @@ use Illuminate\Support\Facades\DB;
 
 class JobController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        $q = $request->query('input-search');
-        $location = $request->query('input-location');
-
         $jobs = DB::table('ofertas')
             ->join('empresas', 'ofertas.id_empresa', '=', 'empresas.id_empresa')
             ->select(
-        'ofertas.id_oferta', 
-                'ofertas.titulo',
+        'id_oferta', 
+                'titulo',
                 'empresas.nombre_empresa',
                 'ofertas.descripcion',
                 'ofertas.ubicacion',
-                'ofertas.estado',
-                'ofertas.salario')
+                'tipo_contrato',
+                'salario')
             ->whereIn('ofertas.estado', ['activa', 'pausada'])
-            ->when($q, function ($query, $q) {
-                return $query->where(function ($subQuery) use ($q) {
-                    $subQuery->where('ofertas.titulo', 'like', '%' . $q . '%')
-                        ->orWhere('ofertas.descripcion', 'like', '%' . $q . '%')
-                        ->orWhere('empresas.nombre_empresa', 'like', '%' . $q . '%');
-                });
-            })
-            ->when($location, function ($query, $location) {
-                return $query->where('ofertas.ubicacion', 'like', '%' . $location . '%');
-            })
             ->orderByDesc('ofertas.created_at')
             ->limit(12)
             ->get();
-
-        if ($request->ajax()) {
-            return view('partials.job-cards', compact('jobs'))->render();
-        }
 
         return view('searchjob', compact('jobs'));
     }
@@ -77,10 +60,5 @@ class JobController extends Controller
         }
 
         return view('jobdetails', compact('job'));
-    }
-
-    public function search(string $input)
-    {
-        
     }
 }

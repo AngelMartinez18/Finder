@@ -42,7 +42,7 @@
             </div>
 
             <div class="flex-2 mt-6 w-1/3 mx-auto text-center">
-                <img src="{{ data_get($job, 'logo', 'https://via.placeholder.com/150') }}" alt="Logo de la empresa" class="mt-4 mb-4 w-64 object-contain text-center mx-auto">
+                <img src="{{ data_get($job, 'logo', 'https://via.placeholder.com/150') }}" alt="Logo de la empresa" class="mt-4 w-32 object-contain text-center mx-auto">
                 <div class="flex items-center justify-center">
                     <i class="fas fa-building mr-2 text-gray-500" aria-hidden="true"></i>
                     <p class="mt-2 text-gray-600">{{ data_get($job, 'nombre_empresa', 'Empresa') }}</p>
@@ -64,6 +64,5 @@
             </div>
         @endif
     </main>
-    <x-footer />
 </body>
 </html>
